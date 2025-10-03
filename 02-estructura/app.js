@@ -1,11 +1,15 @@
 import express from "express";
+import logger from "./middlewares/loggers.js"; //utilizo las llaves para ser expecifico e indicar lo que quiero exportar
 
 const PORT = process.env.PORT || 3000;
 
 const app = express();
 
-//Modo de uso de JSON
-app.use(express.json()); 
+//Middleware para entender JSON
+app.use(express.json());
+
+//Middleware de loggeo
+app.use(logger);
 
 //Endpoint raiz
 app.get("/", (req, res) => { //request y response
