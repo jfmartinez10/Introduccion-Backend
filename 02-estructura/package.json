@@ -1,5 +1,5 @@
 {
-  "name": "01-primer-servidor",
+  "name": "02-estructura",
   "version": "1.0.0",
   "main": "app.js",
   "type": "module",
@@ -7,6 +7,7 @@
     "server": "node app.js",
     "dev": "nodemon app.js"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
