@@ -1,6 +1,5 @@
 
-export const users = []
-const users = [
+export const users = [
     {
         id: 1,
         name: "Juan",
