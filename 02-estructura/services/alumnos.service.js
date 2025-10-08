@@ -1,5 +1,6 @@
 
 import { alumnos } from "../db/memory.js";
+import { users } from "../db/memory.js";
 
 //En un servicio real, 
 // aquí irían las llamadas a la base de datos
@@ -13,4 +14,12 @@ export const getAlumnosFromDb = () => {
 
 
     return alumnos;
+}
+
+export const getUsersFromDb = () => {
+
+    //SELECT * FROM Alumnos;
+
+    
+    return users;
 }

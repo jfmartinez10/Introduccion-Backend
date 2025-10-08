@@ -1,5 +1,7 @@
 import { Router } from "express";
 
+import { getUsersFromDb } from "../controllers/users.controller.js";
+
 const router = Router();
 
 router.get("/users", (req, res) => {
@@ -7,5 +9,8 @@ router.get("/users", (req, res) => {
         "users": []
     })
 });
+
+const users = getUsers();
+res.send(users);
 
 export default router;
