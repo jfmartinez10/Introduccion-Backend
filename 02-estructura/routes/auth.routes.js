@@ -1,16 +1,13 @@
-import { Router } from "express";
+import { Router } from 'express';
 
-import { getUsersFromDb } from "../controllers/users.controller.js";
+import { getUsuarios } from '../controllers/usuarios.controller.js';
 
 const router = Router();
 
-router.get("/users", (req, res) => {
-    res.send({
-        "users": []
-    })
-});
+router.get('/users', (req, res) => {
+    const usuarios = getUsuarios();
+    res.send(usuarios);
 
-const users = getUsers();
-res.send(users);
+});
 
 export default router;
