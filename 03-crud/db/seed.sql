@@ -1,7 +1,7 @@
 
 CREATE DATABASE granja_abejas IF NOT EXISTS;
 
-\c granja_abejas;
+\c granja-abejas;
 
 DROP TABLE IF EXISTS clientes;
 CREATE TABLE clientes (
