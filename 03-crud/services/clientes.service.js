@@ -1,3 +1,4 @@
+import { updateCliente } from "../controllers/clientes.controller.js";
 import pool from "../db/db.js";
 
 export const getAllClientes = async () => {
@@ -14,4 +15,17 @@ export const newClienteService = async (data) => {
         [nombre, telefono, ubicacion]
     );
     return result.rows[0]; //devolvemos el primer elemento del array, si queremos devolver más, habría que quitar el array
+}
+
+export const updateClienteService = async (id, data) => {
+    const { nombre, telefono, ubicacion } = data;
+    const result = await pool.query(
+        'UPDATE clientes SET nombre = $1, telefono = $2, ubicacion = $3 WHERE id_cliente = $4 RETURNING *',
+        [nombre, telefono, ubicacion, id]
+    );
+    if (result.rows.length === 0) {
+        //Lanza un error generico
+        throw new Error("Cliente no encontrado");
+    }
+    return result.rows[0];
 }
