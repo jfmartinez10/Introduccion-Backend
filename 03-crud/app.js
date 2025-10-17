@@ -1,7 +1,7 @@
 import express from "express";
 
 import logger from "./middlewares/loggers.js";
-import mainRouter from "./routes/index.js";
+import index from "./routes/index.js";
 import pool from "./db/db.js";
 
 const PORT = process.env.PORT || 3000;
@@ -23,7 +23,7 @@ app.get("/", (req, res) => { //request y response
 })
 
 //cargar rutas
-app.use("/api", mainRouter);
+app.use("/api", index);
 
 //Conectarse a la db
 //Lo denominamos como promesa, la cual siempre tiene un then y un catch
