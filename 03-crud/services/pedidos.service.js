@@ -18,7 +18,7 @@ export const newPedidoService = async (data) => {
 export const updatePedidoService = async (id, data) => {
     const { id_cliente, fecha_pedido, descripcion, cantidad } = data;
     const result = await pool.query(
-        'UPDATE pedidos SET id_cliente = $1, fecha_pedido = $2, descripcion = $3, cantidad = $4 WHERE id_pedido = $5 RETURNING *',
+        'UPDATE pedidos SET id_cliente = $1, fecha_pedido = $2, descripcion = $3, cantidad = $4 WHERE id_pedidos = $5 RETURNING *',
         [id_cliente, fecha_pedido, descripcion, cantidad, id]
     );
     if (result.rows.length === 0) {
