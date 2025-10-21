@@ -5,3 +5,19 @@ export const getPedidos = (req, res) => {
         res.send(cpedidos);
     });
 }
+
+export const createPedido = (req, res) => { //utilizamos tanto req como res
+    const data= req.body; //capturamos el cuerpo de la petición
+
+    if (data.descripcion && data.id_cliente) {
+    newPedidoService(data)
+    .then((newPedido) => {
+        res.status(201).send(newPedido); //201 es creado
+    })
+    .catch((error) => {
+        res.status(400).send({ error: error.message });
+    });
+    } else {
+    res.status(400).send({ error: "Faltan datos obligatorios" });
+    }
+}
