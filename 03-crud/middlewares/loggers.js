@@ -1,21 +1,27 @@
 import fs from 'fs';
 import path from 'path';
 
-//Middleware para loggear peticiones
-//Export permite importarlo en otros ficheros
+// Directorio donde se guardarán los logs
+const dir_logs = path.join(process.cwd(), "logs");
 
-const logger = (req, res, next) => {
-    const string = `[${new Date().toISOString()}] ${req.method} - ${req.url} - ${req.ip}`
+// Middleware para loggear peticiones
+export const logger = (req, res, next) => {
+    const fecha_actual = new Date().toISOString().slice(0, 10);
+    const nombre_archivo = path.join(dir_logs, fecha_actual + ".log");
+    const cadena_log = "[" + new Date().toISOString() + "] " + req.method + " - " + req.url + " - " + req.ip + "\n";
 
-    console.log(string);
+    // Asegura que el directorio exista (solo si no existe)
+    if (!fs.existsSync(dir_logs)) {
+        fs.mkdirSync(dir_logs, { recursive: true });
+    }
 
-    fs.appendFile('./logs/request.log',
-        string + '\n',
-        (error) => {
-            if(error) {
-                console.log( error);
-            }
+    // Escribe la cadena de log de forma asíncrona
+    fs.appendFile(nombre_archivo, cadena_log, (error) => {
+        if (error) {
+            console.error("Error al escribir en el log:", error);
+            next(); 
+        } else {
+            next();
         }
-    );
-    next();
+    });
 }
