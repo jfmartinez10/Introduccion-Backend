@@ -1,29 +1,32 @@
 import fs from 'fs';
 import path from 'path';
 
-// Directorio donde se guardarán los logs
-const dir_logs = path.join(process.cwd(), "logs");
-
 // Middleware para loggear peticiones
-const logger = (req, res, next) => { // Removido 'export' de aquí
-    const fecha_actual = new Date().toISOString().slice(0, 10);
-    const nombre_archivo = path.join(dir_logs, fecha_actual + ".log");
-    const cadena_log = "[" + new Date().toISOString() + "] " + req.method + " - " + req.url + " - " + req.ip + "\n";
+export const logger = (req, res, next) => {
+    const fecha_actual = new Date();
+    // NOTA: Tienes una variable 'today' que no está definida. La he reemplazado por 'fecha_actual'.
+    const string = `[${fecha_actual.toISOString()}] ${req.method} - ${req.url} - ${req.socket.remoteAddress} ` 
+    console.log(string);
+
+    const date = fecha_actual.toISOString().slice(0, 10);
+    let logPath = path.resolve("./logs/");
 
     // Asegura que el directorio exista (solo si no existe)
-    if (!fs.existsSync(dir_logs)) {
-        fs.mkdirSync(dir_logs, { recursive: true });
+    if (!fs.existsSync(logPath)) {
+        fs.mkdirSync(logPath);
     }
 
-    // Escribe la cadena de log de forma asíncrona
-    fs.appendFile(nombre_archivo, cadena_log, (error) => {
-        if (error) {
-            console.error("Error al escribir en el log:", error);
-            next(); 
-        } else {
-            next();
+    logPath = path.join(logPath, date + '.log');
+
+    fs.appendFile(logPath, 
+        string + '\n',
+        (error) => {
+            if (error) {
+                console.log(error);
+            }
         }
-    });
+    );
+    next();
 }
 
 export default logger;
