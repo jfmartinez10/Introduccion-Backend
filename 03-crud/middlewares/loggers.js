@@ -5,7 +5,7 @@ import path from 'path';
 const dir_logs = path.join(process.cwd(), "logs");
 
 // Middleware para loggear peticiones
-export const logger = (req, res, next) => {
+const logger = (req, res, next) => { // Removido 'export' de aquí
     const fecha_actual = new Date().toISOString().slice(0, 10);
     const nombre_archivo = path.join(dir_logs, fecha_actual + ".log");
     const cadena_log = "[" + new Date().toISOString() + "] " + req.method + " - " + req.url + " - " + req.ip + "\n";
@@ -25,3 +25,5 @@ export const logger = (req, res, next) => {
         }
     });
 }
+
+export default logger;
