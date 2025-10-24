@@ -1,6 +1,6 @@
 import express from "express";
 
-import logger from "./middlewares/loggers.js";
+import { logger } from "./middlewares/loggers.js";
 import index from "./routes/index.js";
 import pool from "./db/db.js";
 
