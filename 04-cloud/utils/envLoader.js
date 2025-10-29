@@ -25,7 +25,7 @@ function validateEnvVars() {
 
 function validateEnvFile() {
     if (!fs.existsSync(".env") || fs.statSync(".env").size === 0) {
-        console.log("Creando el archivo .env.");
+        console.log("Creando el archivo .env");
         let str = "";
         REQUIRED_ENV_VARS.forEach((varName) => {
             str = str + varName +'=\n';
@@ -49,4 +49,5 @@ let ENV = () => {
     return salida;
 }
 
-export default ENV();
+ENV = ENV();
+export default ENV;
