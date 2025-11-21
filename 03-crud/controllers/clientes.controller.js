@@ -6,7 +6,7 @@ export const getClientes = (req, res) => {
     });
 }
 
-export const createCliente = (req, res) => { //utilizamos tanto req como res
+export const createCliente = async (req, res) => { //utilizamos tanto req como res
     const data= req.body; //capturamos el cuerpo de la petición
 
     if (data.nombre) {
@@ -17,6 +17,14 @@ export const createCliente = (req, res) => { //utilizamos tanto req como res
     .catch((error) => {
         res.status(400).send({ error: error.message });
     });
+
+    try{
+            const newCliente = await newClienteService(data);
+            res.status(201).send(newCliente);
+        } catch (error) {   
+            res.status(400).send({ error: error.message });
+        }
+
     } else {
     res.status(400).send({ error: "Faltan datos obligatorios" });
     }
