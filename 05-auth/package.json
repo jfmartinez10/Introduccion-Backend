@@ -1,0 +1,19 @@
+{
+  "name": "05-auth",
+  "version": "1.0.0",
+  "main": "backend/app.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --env-file=.env ./backend/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
